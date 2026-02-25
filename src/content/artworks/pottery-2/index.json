@@ -1,7 +1,7 @@
 {
   "title": "pottery-2",
   "category": "pottery",
-  "image": "/images/pottery/pottery-2.jpg",
+  "image": "../../../assets/images/pottery/pottery-2.jpg",
   "medium": "",
   "dimensions": "",
   "year": "",

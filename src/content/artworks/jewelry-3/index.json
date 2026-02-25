@@ -1,7 +1,7 @@
 {
   "title": "jewelry-3",
   "category": "jewelry",
-  "image": "/images/jewelry/jewelry-3.jpg",
+  "image": "../../../assets/images/jewelry/jewelry-3.jpg",
   "medium": "",
   "dimensions": "",
   "year": "",

@@ -154,6 +154,9 @@ const ogImageURL = new URL(image, Astro.url);
 					// Navigation Click Handlers
 					if(btnPrev) btnPrev.addEventListener('click', showPrev);
 					if(btnNext) btnNext.addEventListener('click', showNext);
+					
+					const btnClose = document.querySelector('.lightbox-close');
+					if(btnClose) btnClose.addEventListener('click', closeLightbox);
 
 					lightbox.addEventListener('click', (e) => {
 						// Only close if clicking the backdrop, not the image or buttons
@@ -294,7 +297,7 @@ const ogImageURL = new URL(image, Astro.url);
 		position: absolute;
 		top: 2rem;
 		right: 2rem;
-		z-index: 3;
+		z-index: 10003;
 		background: rgba(255,255,255,0.1);
 		border: 1px solid rgba(255,255,255,0.2);
 		color: white;

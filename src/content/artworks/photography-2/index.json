@@ -1,7 +1,7 @@
 {
   "title": "photography-2",
   "category": "photography",
-  "image": "/images/photography/photography-2.jpg",
+  "image": "../../../assets/images/photography/photography-2.jpg",
   "medium": "",
   "dimensions": "",
   "year": "",

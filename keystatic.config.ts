@@ -1,11 +1,12 @@
 import { config, fields, collection } from '@keystatic/core';
 
 export default config({
-  storage: {
-    // In local development, save content to the local file system
+  storage: process.env.VERCEL === '1' ? {
+    kind: 'github',
+    repo: 'itpro2792-beep/thane-artwork'
+  } : {
     kind: 'local',
   },
-  // We'll eventually set this up to push to GitHub, but 'local' is fine for now
   ui: {
     brand: { name: 'Ann M. Thane Gallery CMS' }
   },
@@ -38,8 +39,8 @@ export default config({
         }),
         image: fields.image({
           label: 'Artwork Image',
-          directory: 'public/images/artworks',
-          publicPath: '/images/artworks/',
+          directory: 'src/assets/images/artworks',
+          publicPath: '/src/assets/images/artworks/',
         }),
         medium: fields.text({ label: 'Medium', description: 'e.g. Mixed Media, Oil on Canvas' }),
         dimensions: fields.text({ label: 'Dimensions', description: 'e.g. 24" x 36"' }),

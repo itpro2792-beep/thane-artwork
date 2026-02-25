@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -42,7 +43,7 @@ import StructuredData from '../components/StructuredData.astro';
 
 <section class="gallery-grid" data-reveal>
     <div class="gallery-item" data-stagger>
-      <img src="/images/musings/musings-1.jpg" alt="Artwork from Musings" loading="eager" decoding="async" />
+      <Image src="/images/musings/musings-1.jpg" alt="Artwork from Musings" loading="eager" decoding="async" />
     </div>
   </section>
   </main>
