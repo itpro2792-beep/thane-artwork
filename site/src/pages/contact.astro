@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+{/* 
+  ARCHMAGUS NOTE FOR THE ARCHITECT:
+  Please replace the placeholder email address below with the correct one.
+  The contact form is currently for visual purposes only and is not functional.
+  It will need to be connected to a service like Netlify Forms, Formspree, or a custom backend to receive submissions.
+*/}
+<BaseLayout title="Contact - Ann M. Thane">
+  <header style="text-align: center; margin-bottom: 4rem;">
+    <h1>Get in Touch</h1>
+    <p>For inquiries, commissions, or just to say hello.</p>
+  </header>
+
+  <div class="contact-container">
+    <div class="contact-info">
+      <h3>Direct Contact</h3>
+      <p>The best way to reach out is via email:</p>
+      <a href="mailto:email@example.com" class="email-link">email@example.com</a>
+    </div>
+    <div class="contact-form">
+      <h3>Contact Form</h3>
+      {/* 
+        ARCHITECT'S NOTE: To make this form functional:
+        1. Create a free account at https://formspree.io/
+        2. Create a new form and get your unique endpoint URL.
+        3. Replace the '#' in the `action` attribute below with your Formspree URL.
+        4. Remove the `disabled` attribute from the submit button.
+      */}
+      <form action="#" method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .contact-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  @media (min-width: 768px) {
+    .contact-container {
+      grid-template-columns: 1fr 1fr;
+      align-items: flex-start;
+    }
+  }
+  .contact-info {
+    background: var(--bg-card);
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+  }
+  .email-link {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+  }
+  input, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    background: #2a2a2a;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-heading);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+  }
+  .submit-btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background-color: var(--brand);
+    color: var(--text-heading);
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .submit-btn:hover:not(:disabled) {
+    background-color: var(--brand-light);
+    color: var(--bg-main);
+  }
+  .submit-btn:disabled {
+    background-color: #333;
+    cursor: not-allowed;
+  }
+</style>

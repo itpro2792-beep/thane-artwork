@@ -1,0 +1,201 @@
+---
+// src/pages/gallery.astro
+import Layout from '../layouts/Layout.astro';
+
+const categories = ["All", "The Women", "Mosaics", "Pyrography", "Pottery", "Jewelry", "Murals", "Photography", "Early Works"];
+
+const galleryItems = [
+  { category: "The Women", seed: "women1", title: "Contemplation" },
+  { category: "Mosaics", seed: "mosaic1", title: "Riverlink Detail" },
+  { category: "Pyrography", seed: "pyro1", title: "Forest Spirit" },
+  { category: "The Women", seed: "women2", title: "Resilience" },
+  { category: "Pottery", seed: "pottery1", title: "Earthen Bowl" },
+  { category: "Jewelry", seed: "jewelry1", title: "Beaded Necklace" },
+  { category: "Mosaics", seed: "mosaic2", title: "Tree of Life" },
+  { category: "Murals", seed: "mural1", title: "Community Mural" },
+  { category: "Photography", seed: "photo1", title: "Hudson Valley Light" },
+  { category: "The Women", seed: "women3", title: "Emergence" },
+  { category: "Pyrography", seed: "pyro2", title: "Avian Study" },
+  { category: "Early Works", seed: "early1", title: "Charcoal Sketch" },
+];
+---
+<Layout
+	title="Gallery | Ann M. Thane"
+	description="Explore the diverse art portfolio of Ann M. Thane, featuring mosaics, illustrations, pyrography, and more."
+>
+	<section class="gallery-page">
+		<header class="gallery-header" data-reveal>
+			<h1>Gallery</h1>
+			<p>A curated collection of works spanning multiple decades and mediums.</p>
+		</header>
+
+		<div class="filter-tabs" data-reveal>
+			{categories.map(cat => (
+				<button class="filter-btn" data-filter={cat.toLowerCase().replace(/\s+/g, '-')} >{cat}</button>
+			))}
+		</div>
+
+		<div class="gallery-grid" data-reveal>
+			{galleryItems.map((item, index) => (
+				<a href={`#lightbox-${index}`} class="gallery-item" data-category={item.category.toLowerCase().replace(/\s+/g, '-')} data-stagger>
+					<img src={`https://picsum.photos/seed/${item.seed}/800/600`} alt={item.title} loading={index < 4 ? "eager" : "lazy"} decoding="async">
+				</a>
+			))}
+		</div>
+	</section>
+
+	<!-- Lightboxes -->
+	{galleryItems.map((item, index) => (
+		<a href="#_" class="lightbox" id={`lightbox-${index}`}>
+			<img src={`https://picsum.photos/seed/${item.seed}/1200/800`} alt={item.title} />
+			<div class="lightbox-caption">{item.title} - {item.category}</div>
+		</a>
+	))}
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // --- Filtering Logic ---
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const filterAllBtn = document.querySelector('.filter-btn[data-filter="all"]');
+    if (filterAllBtn) {
+      filterAllBtn.classList.add('active');
+    }
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        galleryItems.forEach(item => {
+          if (filter === 'all' || item.dataset.category === filter) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // --- Lightbox Accessibility Enhancement ---
+    const lightboxes = document.querySelectorAll('.lightbox');
+    
+    // Function to close any open lightbox
+    const closeLightbox = () => {
+      window.location.hash = '#_';
+    };
+
+    // Add keyboard support
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+
+    // Add background click support
+    lightboxes.forEach(lightbox => {
+      lightbox.addEventListener('click', (event) => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+	.gallery-header { text-align: center; margin-bottom: 3rem; }
+	.gallery-header p { max-width: 600px; margin: 1rem auto 0; color: var(--text-secondary); }
+
+	.filter-tabs {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.5rem;
+		margin-bottom: 3rem;
+	}
+	.filter-btn {
+		background: none;
+		border: 1px solid var(--border);
+		border-radius: 99px;
+		padding: 0.5rem 1.5rem;
+		font-family: var(--font-body);
+		font-size: var(--text-sm);
+		font-weight: 500;
+		color: var(--text-secondary);
+		cursor: pointer;
+		transition: var(--transition);
+	}
+	.filter-btn:hover {
+		background: var(--bg-elevated);
+		border-color: var(--border-hover);
+		color: var(--text-primary);
+	}
+	.filter-btn.active {
+		background: var(--accent-terracotta);
+		border-color: var(--accent-terracotta);
+		color: var(--bg-primary);
+	}
+
+	.gallery-grid {
+		column-count: 3;
+		column-gap: 1.5rem;
+	}
+	.gallery-item {
+		display: inline-block;
+		width: 100%;
+		margin-bottom: 1.5rem;
+		overflow: hidden;
+		border-radius: var(--radius-sm);
+		box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+	}
+	.gallery-item img {
+		width: 100%;
+		height: auto;
+		display: block;
+		transition: transform 0.6s var(--ease);
+	}
+	.gallery-item:hover img {
+		transform: scale(1.05);
+	}
+	@media (max-width: 1024px) { .gallery-grid { column-count: 2; } }
+	@media (max-width: 600px) { .gallery-grid { column-count: 1; } }
+
+	/* Lightbox */
+	.lightbox {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 2000;
+		background: rgba(0,0,0,0.85);
+		backdrop-filter: blur(10px);
+		align-items: center;
+		justify-content: center;
+		padding: 2rem;
+		animation: fadeIn 0.4s var(--ease);
+	}
+	@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+	.lightbox:target {
+		display: flex;
+		flex-direction: column;
+	}
+	.lightbox img {
+		max-width: 100%;
+		max-height: 90%;
+		object-fit: contain;
+		box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+		border-radius: 4px;
+	}
+	.lightbox-caption {
+		margin-top: 1rem;
+		color: var(--bg-primary);
+		font-size: var(--text-sm);
+		text-align: center;
+	}
+</style>

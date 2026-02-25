@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+{/* 
+  ARCHMAGUS NOTE FOR THE ARCHITECT:
+  This is a placeholder gallery. To add the real artwork, please:
+  1. Create a directory: `public/images/gallery`
+  2. Place your mother's artwork images in that directory.
+  3. Replace the `src` and content for each `gallery-item` below with the actual file paths and details.
+  For example: <img src="/images/gallery/name-of-art.jpg" alt="Description of the art">
+*/}
+<BaseLayout title="Gallery - Ann M. Thane">
+  <header style="text-align: center; margin-bottom: 4rem;">
+    <h1>Gallery</h1>
+    <p>A selection of works from across various mediums.</p>
+  </header>
+
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <a href="https://placehold.co/1200x800/1e1e1e/b19cd9?text=Artwork+1" class="lightbox-trigger">
+        <img src="https://placehold.co/600x400/1e1e1e/b19cd9?text=Artwork+1" alt="Placeholder for artwork">
+      </a>
+      <h3>The Women Series</h3>
+      <p>Mixed-media illustration</p>
+    </div>
+    <div class="gallery-item">
+       <a href="https://placehold.co/1200x800/1e1e1e/b19cd9?text=Artwork+2" class="lightbox-trigger">
+        <img src="https://placehold.co/600x400/1e1e1e/b19cd9?text=Artwork+2" alt="Placeholder for artwork">
+      </a>
+      <h3>Pyrography</h3>
+      <p>The art of burning wood</p>
+    </div>
+    <div class="gallery-item">
+      <a href="https://placehold.co/1200x800/1e1e1e/b19cd9?text=Artwork+3" class="lightbox-trigger">
+        <img src="https://placehold.co/600x400/1e1e1e/b19cd9?text=Artwork+3" alt="Placeholder for artwork">
+      </a>
+      <h3>Mosaics</h3>
+      <p>Newer explorations in tile</p>
+    </div>
+    <div class="gallery-item">
+      <a href="https://placehold.co/1200x800/1e1e1e/b19cd9?text=Artwork+4" class="lightbox-trigger">
+        <img src="https://placehold.co/600x400/1e1e1e/b19cd9?text=Artwork+4" alt="Placeholder for artwork">
+      </a>
+      <h3>Jewelry</h3>
+      <p>Hand-beaded creations</p>
+    </div>
+     <div class="gallery-item">
+      <a href="https://placehold.co/1200x800/1e1e1e/b19cd9?text=Artwork+5" class="lightbox-trigger">
+        <img src="https://placehold.co/600x400/1e1e1e/b19cd9?text=Artwork+5" alt="Placeholder for artwork">
+      </a>
+      <h3>Pottery</h3>
+      <p>The living soul of clay</p>
+    </div>
+     <div class="gallery-item">
+      <a href="https://placehold.co/1200x800/1e1e1e/b19cd9?text=Artwork+6" class="lightbox-trigger">
+        <img src="https://placehold.co/600x400/1e1e1e/b19cd9?text=Artwork+6" alt="Placeholder for artwork">
+       </a>
+      <h3>Early Works</h3>
+      <p>Finding an artistic voice</p>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <span class="close-lightbox">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+  </div>
+</BaseLayout>
+
+<style>
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  .gallery-item {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    cursor: pointer;
+  }
+  .gallery-item h3 {
+    margin: 1.5rem 0 0.5rem;
+    color: var(--brand-light);
+  }
+  .gallery-item p {
+    margin: 0 0 1.5rem;
+    padding: 0 1rem;
+    color: var(--text-main);
+  }
+
+  /* Lightbox Styles */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+  }
+  .lightbox-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 1200px;
+  }
+  .close-lightbox {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const triggers = document.querySelectorAll('.lightbox-trigger');
+  const closeBtn = document.querySelector('.close-lightbox');
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      lightbox.style.display = 'block';
+      lightboxImg.src = this.href;
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+  }
+
+  closeBtn.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+</script>

@@ -1,0 +1,48 @@
+<header>
+  <nav>
+    <a href="/" class="logo">ANN M. THANE</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/gallery">Gallery</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  header {
+    background: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    text-decoration: none;
+  }
+  .nav-links a {
+    margin-left: 2rem;
+    color: var(--text-main);
+    font-size: 1rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .nav-links a:hover {
+    color: var(--brand-light);
+    text-decoration: none;
+  }
+</style>

@@ -1,0 +1,325 @@
+---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allArtworks = await getCollection('artworks');
+
+// Select a few specific pieces to feature
+const featuredCategories = ['women', 'mosaics', 'pyrography'];
+const featuredArtworks = featuredCategories.map(cat => 
+  allArtworks.find(art => art.data.category === cat)
+).filter(Boolean); // Filter out any undefined if collection is empty
+---
+
+<Layout
+	title="Ann M. Thane | Artist • Explorer • Mom"
+	description="The official portfolio for Ann M. Thane, a multi-disciplinary artist and former mayor based in Amsterdam, NY."
+	image="/images/women/women-1.jpg"
+>
+	<!-- Hero Section -->
+	<header class="hero">
+		<div class="hero-bg"></div>
+		<div class="hero-noise"></div>
+		<div class="hero-content" data-reveal>
+			<div class="hero-badge">Ann M. Thane Collection</div>
+			<h1>The Evidence<br>of a Life</h1>
+			<p class="subtitle">artist · explorer · mom</p>
+			
+			<div class="hero-actions">
+				<a href="#welcome" class="btn btn-primary">Enter Gallery</a>
+				<a href="/women" class="btn btn-outline">Latest Work</a>
+			</div>
+		</div>
+		<a href="#welcome" class="scroll-down" aria-label="Scroll down"></a>
+	</header>
+
+	<!-- Welcome Section -->
+	<section id="welcome" class="welcome-section">
+		<div class="container" data-reveal>
+			<blockquote class="welcome-quote">
+				"I find that expressing myself artistically is not a choice; it is what I have been born to do — whatever higher power is out there channels through me via the arts."
+				<cite>– Ann M. Thane</cite>
+			</blockquote>
+		</div>
+	</section>
+
+	<!-- Featured Work Section -->
+	<section class="featured-work">
+		<div class="container">
+			<h2 data-reveal>Featured Work</h2>
+			<div class="gallery-grid" data-reveal>
+				{featuredArtworks.map((artwork, index) => {
+					// Map category to a readable title
+					const categoryTitles = {
+						'women': 'The Women Series',
+						'mosaics': 'Mosaics & Public Art',
+						'pyrography': 'Pyrography'
+					};
+					const title = categoryTitles[artwork.data.category] || artwork.data.category;
+					
+					return (
+						<a href={`/${artwork.data.category}`} class="gallery-card" data-stagger>
+							<div class="card-image-wrapper">
+								<img src={artwork.data.image} alt={artwork.data.title} loading={index < 4 ? "eager" : "lazy"} fetchpriority={index < 4 ? "high" : "auto"} decoding="async" />
+							</div>
+							<h3>{title}</h3>
+							<p class="category">View Collection</p>
+						</a>
+					);
+				})}
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		height: 100vh;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		color: var(--bg-primary);
+		overflow: hidden;
+	}
+	.hero-bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: url('/images/women/women-1.jpg') no-repeat center center/cover;
+		filter: brightness(0.4);
+		transform: scale(1.05);
+	}
+	.hero-content {
+		position: relative;
+		z-index: 2;
+	}
+	.hero h1 {
+		font-size: var(--text-hero);
+		font-weight: 700;
+		letter-spacing: -2px;
+		line-height: 1;
+	}
+	.hero .subtitle {
+		font-family: var(--font-body);
+		font-size: var(--text-lg);
+		color: var(--bg-primary);
+		opacity: 0.9;
+		margin-top: 1rem;
+	}
+	.scroll-down {
+		position: absolute;
+		bottom: 2rem;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 24px;
+		height: 40px;
+		border: 2px solid var(--bg-primary);
+		border-radius: 20px;
+	}
+	.scroll-down::after {
+		content: '';
+		position: absolute;
+		top: 8px;
+		left: 50%;
+		width: 4px;
+		height: 4px;
+		background: var(--bg-primary);
+		border-radius: 50%;
+		transform: translateX(-50%);
+		animation: scroll-indicator 2s infinite;
+	}
+	@keyframes scroll-indicator {
+		0% { transform: translate(-50%, 0); opacity: 0; }
+		50% { opacity: 1; }
+		100% { transform: translate(-50%, 10px); opacity: 0; }
+	}
+
+	.welcome-section {
+		text-align: center;
+	}
+	.welcome-quote {
+		font-family: var(--font-display);
+		font-size: var(--text-2xl);
+		line-height: 1.6;
+		max-width: 800px;
+		margin: 0 auto;
+		color: var(--text-primary);
+		border-left: 4px solid var(--accent-terracotta);
+		padding-left: 2rem;
+		font-style: italic;
+	}
+	.welcome-quote cite {
+		display: block;
+		font-family: var(--font-body);
+		font-style: normal;
+		font-size: var(--text-base);
+		color: var(--text-secondary);
+		margin-top: 1.5rem;
+	}
+
+	.featured-work h2 {
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+	.gallery-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+	}
+	.gallery-card {
+		text-decoration: none;
+		color: var(--text-primary);
+		transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+	}
+	.card-image-wrapper {
+		overflow: hidden;
+		border-radius: var(--radius-sm);
+		margin-bottom: 1.5rem;
+		box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+		transition: box-shadow 0.4s var(--ease);
+	}
+	.gallery-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+	}
+	.gallery-card img {
+		width: 100%;
+		height: auto;
+		display: block;
+		transition: transform 0.6s var(--ease);
+	}
+	.gallery-card:hover img {
+		transform: scale(1.05);
+	}
+	.gallery-card h3 {
+		font-size: var(--text-xl);
+	}
+	.gallery-card .category {
+		font-family: var(--font-body);
+		font-size: var(--text-sm);
+		color: var(--text-muted);
+	}
+	
+	/* ——— Premium Hero Enhancements ——— */
+	.hero-noise {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+		opacity: 0.05;
+		z-index: 1;
+		pointer-events: none;
+	}
+	.hero-content {
+		position: relative;
+		z-index: 2;
+		background: rgba(0, 0, 0, 0.4);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		padding: 4rem 5rem;
+		border-radius: 30px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+		transform: translateY(0);
+		transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+	.hero-content:hover {
+		transform: translateY(-5px);
+		border-color: rgba(255, 255, 255, 0.2);
+	}
+	.hero-badge {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 3px;
+		color: var(--accent-gold);
+		margin-bottom: 2rem;
+		display: block;
+	}
+	.hero h1 {
+		font-size: var(--text-hero);
+		font-weight: 800;
+		letter-spacing: -3px;
+		line-height: 1.05;
+		text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+		margin-bottom: 1rem;
+	}
+	.hero .subtitle {
+		font-family: var(--font-display);
+		font-size: var(--text-xl);
+		color: rgba(255, 255, 255, 0.8);
+		margin-bottom: 3rem;
+		font-style: italic;
+	}
+	.hero-actions {
+		display: flex;
+		gap: 1.5rem;
+		justify-content: center;
+		margin-top: 2rem;
+	}
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1rem 2.5rem;
+		border-radius: 40px;
+		font-family: var(--font-body);
+		font-weight: 600;
+		font-size: 0.95rem;
+		letter-spacing: 0.5px;
+		text-decoration: none;
+		transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+	.btn-primary {
+		background: var(--accent-terracotta);
+		color: var(--bg-primary);
+		box-shadow: 0 8px 25px rgba(230, 80, 50, 0.2);
+	}
+	.btn-primary:hover {
+		background: var(--text-primary);
+		transform: translateY(-3px);
+		box-shadow: 0 15px 35px rgba(255, 255, 255, 0.15);
+		color: var(--bg-primary);
+	}
+	.btn-outline {
+		background: transparent;
+		color: var(--bg-primary);
+		border: 1px solid rgba(255, 255, 255, 0.3);
+	}
+	.btn-outline:hover {
+		background: rgba(255, 255, 255, 0.1);
+		border-color: rgba(255, 255, 255, 0.6);
+		transform: translateY(-3px);
+	}
+
+	/* ——— Premium Gallery Glass Cards ——— */
+	.gallery-card {
+		background: var(--bg-elevated);
+		border-radius: 24px;
+		padding: 1.5rem;
+		border: 1px solid var(--border);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);	
+	}
+	.gallery-card:hover {
+		background: var(--bg-card-hover);
+		transform: translateY(-8px) scale(1.02);
+		box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+		border-color: var(--accent-terracotta);
+	}
+	.card-image-wrapper {
+		border-radius: 16px;
+		box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+	}
+	.gallery-card h3 {
+		margin-top: 1rem;
+		font-family: var(--font-display);
+		font-size: 1.75rem;
+	}
+</style>

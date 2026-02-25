@@ -1,0 +1,267 @@
+---
+// src/components/Header.astro
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "Biography", href: "/biography/" },
+  { 
+    name: "Portfolio", 
+    href: "#",
+    dropdown: [
+      { name: "Women", href: "/women/" },
+      { name: "Mosaics", href: "/mosaics/" },
+      { name: "Creative Connections Mosaic", href: "/creative-connections-clubhouse-mosaic/" },
+      { name: "Pottery", href: "/pottery/" },
+      { name: "Murals", href: "/murals/" },
+      { name: "Pyrography", href: "/pyrography/" },
+      { name: "Photography", href: "/photography/" },
+      { name: "Jewelry", href: "/jewelry/" },
+      { name: "Embellished Furniture", href: "/embellished-furniture/" },
+      { name: "Embellished Shells", href: "/embellished-shells/" },
+      { name: "Miscellaneous Projects", href: "/miscellaneous-projects/" },
+      { name: "Older Work", href: "/older-work/" }
+    ]
+  },
+  { name: "Musings", href: "/musings/" },
+  { name: "Media", href: "/media-worth-mentioning/" },
+  { name: "Contact", href: "/contact/" },
+];
+---
+<header id="site-header">
+  <div class="container">
+    <a href="/" class="brand">ANN M. THANE</a>
+    <nav class="desktop-nav">
+      <ul>
+        {navLinks.map(link => (
+          <li class={link.dropdown ? "has-dropdown" : ""}>
+            <a href={link.href} class={currentPath === link.href || (link.dropdown && link.dropdown.some(d => currentPath.startsWith(d.href))) ? "active" : ""}>{link.name}</a>
+            {link.dropdown && (
+              <ul class="dropdown-menu">
+                {link.dropdown.map(dropLink => (
+                  <li><a href={dropLink.href} class={currentPath === dropLink.href ? "active" : ""}>{dropLink.name}</a></li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <button id="mobile-nav-toggle" aria-label="Open navigation menu" aria-controls="mobile-nav-menu" aria-expanded="false">
+      <div class="hamburger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+  </div>
+</header>
+<div class="mobile-nav-menu">
+  <nav>
+    <ul>
+      {navLinks.map(link => (
+        <>
+          <li><a href={link.href} class={currentPath === link.href ? "active" : ""}>{link.name}</a></li>
+          {link.dropdown && link.dropdown.map(dropLink => (
+            <li class="mobile-sublink"><a href={dropLink.href} class={currentPath === dropLink.href ? "active" : ""}>{dropLink.name}</a></li>
+          ))}
+        </>
+      ))}
+    </ul>
+  </nav>
+</div>
+
+<script>
+  const toggleBtn = document.getElementById('mobile-nav-toggle');
+  const mobileMenu = document.querySelector('.mobile-nav-menu');
+  const header = document.getElementById('site-header');
+
+  toggleBtn.addEventListener('click', () => {
+    const isActive = toggleBtn.classList.toggle('is-active');
+    mobileMenu.classList.toggle('is-active');
+    header.classList.toggle('is-active');
+    toggleBtn.setAttribute('aria-expanded', isActive);
+  });
+</script>
+
+<style>
+  #site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 1.5rem 0;
+    background: var(--bg-glass);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: var(--transition);
+  }
+  #site-header.is-active {
+    background: var(--bg-primary);
+  }
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brand {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+  .desktop-nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .desktop-nav a {
+    display: inline-block;
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 0.5rem 0.25rem;
+    border-bottom: 2px solid transparent;
+    transition: var(--transition);
+  }
+  .desktop-nav a:hover, .desktop-nav a:focus, .desktop-nav a.active {
+    color: var(--text-primary);
+    border-bottom-color: var(--accent-terracotta);
+    outline: none;
+  }
+
+  /* Dropdown Styles */
+  .has-dropdown {
+    position: relative;
+    padding-bottom: 0.5rem; /* increase hover area */
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+
+  .has-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .dropdown-menu li {
+    margin: 0;
+  }
+
+  .dropdown-menu a {
+    display: block;
+    width: 100%;
+    border-bottom: none;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+  }
+
+  .dropdown-menu a:hover, .dropdown-menu a:focus, .dropdown-menu a.active {
+    background: var(--bg-elevated);
+    color: var(--accent-terracotta);
+    border-bottom: none;
+    outline: none;
+  }
+  #mobile-nav-toggle { display: none; }
+  .mobile-nav-menu { display: none; }
+
+  @media (max-width: 768px) {
+    .desktop-nav { display: none; }
+    #mobile-nav-toggle {
+      display: flex;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1001;
+      padding: 0;
+    }
+    .hamburger-icon span {
+      display: block;
+      width: 25px;
+      height: 2px;
+      margin: 5px 0;
+      background: var(--text-primary);
+      transition: all 0.3s var(--ease);
+    }
+    #mobile-nav-toggle.is-active .hamburger-icon span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    #mobile-nav-toggle.is-active .hamburger-icon span:nth-child(2) {
+      opacity: 0;
+    }
+    #mobile-nav-toggle.is-active .hamburger-icon span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+    
+    .mobile-nav-menu {
+      display: flex;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-primary);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      transform: translateX(100%);
+      transition: transform 0.4s var(--ease);
+    }
+    .mobile-nav-menu.is-active {
+      transform: translateX(0);
+    }
+    .mobile-nav-menu ul {
+      list-style: none;
+      text-align: center;
+    }
+    .mobile-nav-menu li {
+      margin: 1.5rem 0;
+    }
+    .mobile-nav-menu a {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    .mobile-nav-menu a:hover, .mobile-nav-menu a:focus, .mobile-nav-menu a.active {
+      color: var(--accent-terracotta);
+      outline: none;
+    }
+    
+    .mobile-sublink {
+      margin: 1rem 0 !important;
+    }
+    
+    .mobile-sublink a {
+      font-size: var(--text-xl);
+      color: var(--text-secondary);
+    }
+  }
+</style>

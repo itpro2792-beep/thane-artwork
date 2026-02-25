@@ -1,0 +1,104 @@
+---
+// src/pages/press.astro
+import Layout from '../layouts/Layout.astro';
+
+const pressItems = [
+  {
+    outlet: "Bold Journey Magazine",
+    title: "Meet Ann M Thane",
+    date: "November 2023",
+    url: "https://boldjourney.com/news/meet-ann-m-thane/"
+  },
+  {
+    outlet: "518 Profiles Magazine",
+    title: "An Artist's Journey Home",
+    date: "January 2023",
+    url: "https://issuu.com/ininkny/docs/2023_february_518_profiles_magazine"
+  },
+  {
+    outlet: "The Daily Gazette",
+    title: "Former Mayor Just Wants to Make Art",
+    date: "March 2020",
+    url: "#"
+  }
+];
+---
+<Layout
+	title="Press | Ann M. Thane"
+	description="Media coverage and articles featuring artist Ann M. Thane."
+>
+	<section class="press-page">
+		<header class="press-header" data-reveal>
+			<h1>In the Press</h1>
+			<p>Features, interviews, and articles covering a career in art and public service.</p>
+		</header>
+
+		<div class="press-grid" data-reveal>
+			{pressItems.map(item => (
+				<a href={item.url} target="_blank" rel="noopener noreferrer" class="press-card" data-stagger>
+					<p class="outlet">{item.outlet}</p>
+					<h3>{item.title}</h3>
+					<span class="date">{item.date}</span>
+					<span class="read-more">Read Article &rarr;</span>
+				</a>
+			))}
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.press-header { text-align: center; margin-bottom: 3rem; }
+	.press-header p { max-width: 600px; margin: 1rem auto 0; color: var(--text-secondary); }
+
+	.press-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.press-card {
+		display: block;
+		background: var(--bg-primary);
+		padding: 2rem;
+		border-radius: var(--radius-sm);
+		border: 1px solid var(--border);
+		transition: var(--transition);
+		text-decoration: none;
+	}
+	.press-card:hover {
+		transform: translateY(-4px);
+		border-color: var(--border-hover);
+		box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+	}
+
+	.outlet {
+		font-family: var(--font-body);
+		font-size: var(--text-sm);
+		font-weight: 500;
+		color: var(--accent-terracotta);
+		margin-bottom: 0.5rem;
+	}
+	.press-card h3 {
+		font-size: var(--text-xl);
+		color: var(--text-primary);
+	}
+	.date {
+		display: block;
+		font-size: var(--text-xs);
+		color: var(--text-muted);
+		margin-top: 1rem;
+	}
+	.read-more {
+		display: inline-block;
+		font-weight: bold;
+		font-size: var(--text-sm);
+		color: var(--text-primary);
+		margin-top: 1.5rem;
+		border-bottom: 2px solid transparent;
+	}
+	.press-card:hover .read-more {
+		border-bottom-color: var(--accent-terracotta);
+	}
+</style>

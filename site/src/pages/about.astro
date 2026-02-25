@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="About - Ann M. Thane">
+  <header style="text-align: center; margin-bottom: 4rem;">
+    <h1>About the Artist</h1>
+  </header>
+  
+  <section class="about-content">
+    <img src="https://placehold.co/400x400/1e1e1e/b19cd9?text=Ann+M.+Thane" alt="A placeholder portrait of Ann M. Thane" class="profile-pic">
+    <div>
+      <h2>An Innate Calling</h2>
+      <p>
+        "I find that expressing myself artistically is not a choice; it is what I have been born to do, just like some people have a talent for car mechanics or baking. Whatever that higher power is out there channels through me via the arts."
+      </p>
+      <p>
+        Over the years, Ann has explored a variety of mediums, from mixed-media illustrations and pyrography to jewelry and the living soul of clay. Her work is a journey of discovery, a conversation between the material and the spirit.
+      </p>
+      <h2>From Public Service to Personal Art</h2>
+      <p>
+        Ann's creative journey is interwoven with a life of public service. As the former Mayor of the City of Amsterdam, she managed a $32M budget and over 200 employees. Her personal blog, <a href="https://wildthane.wordpress.com" target="_blank">wildthane.wordpress.com</a>, served as a conduit for communication and a space to explore passions beyond the political sphere. This blend of civic responsibility and deep artistic expression informs the unique perspective evident in her work today.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .about-content {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+.profile-pic {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 4px solid var(--brand);
+}
+</style>

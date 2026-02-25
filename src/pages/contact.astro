@@ -1,0 +1,300 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StructuredData from '../components/StructuredData.astro';
+---
+
+<Layout title="Contact | Ann M. Thane">
+  <StructuredData />
+  <Header />
+  
+  <main class="page-container fade-in">
+    <header class="page-header">
+      
+      <nav aria-label="Breadcrumb" class="breadcrumb" style="text-align: center; margin-bottom: 2rem; font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 1px;">
+        <a href="/" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-terracotta)'" onmouseout="this.style.color='var(--text-muted)'">Home</a> 
+        <span style="color: var(--border-hover); margin: 0 0.5rem;">/</span> 
+        <span style="color: var(--accent-sage);">Contact</span>
+      </nav>
+      <h1 class="page-title">Contact</h1>
+      <div class="page-divider"></div>
+    </header>
+
+    <div class="content-wrapper">
+      <div class="intro-block" data-reveal>
+        <p class="lead" style="margin-bottom: 0px; font-size: var(--text-3xl); font-family: var(--font-display); color: var(--text-primary); text-align: center;">ANN M. THANE</p>
+        <p class="meta" style="font-family: var(--font-mono); font-size: var(--text-sm); letter-spacing: 2px; text-transform: uppercase; color: var(--accent-sage); text-align: center; margin-bottom: 4rem;">artist • explorer • mom</p>
+      </div>
+      <div class="contact-grid">
+        
+        <div class="contact-info" data-reveal>
+          <h3>Get in Touch</h3>
+          <p>Whether you're interested in a commission, inquiring about an available piece, or just want to connect, I'd love to hear from you. I generally respond to all inquiries within 48 hours.</p>
+          
+          <ul class="info-list">
+            <li>
+              <strong>Email</strong><br>
+              <a href="mailto:annmthane@gmail.com">annmthane@gmail.com</a>
+            </li>
+            <li>
+              <strong>Phone</strong><br>
+              <a href="tel:5187014465">518 701-4465</a>
+            </li>
+            <li>
+              <strong>Studio</strong><br>
+              37 Prospect Street<br>Amsterdam, NY 12010
+            </li>
+            <li>
+              <strong>Social</strong><br>
+              <a href="https://www.facebook.com/MotherMosaic/" target="_blank" rel="noopener">FB: Mother Mosaic of Amsterdam NY</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="contact-form-wrapper" data-reveal>
+        <form class="contact-form" action="https://formspree.io/f/annmthane" method="POST">
+            <input type="text" name="_gotcha" style="display:none" />
+            <input type="hidden" name="_subject" value="New inquiry from thaneartwork.com" />
+            <div class="form-group">
+              <label for="name">Name <span aria-hidden="true">*</span></label>
+              <input type="text" id="name" name="name" required aria-required="true" autocomplete="name" placeholder="Jane Doe">
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email <span aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" required aria-required="true" autocomplete="email" placeholder="jane@example.com">
+            </div>
+            
+            <div class="form-group">
+              <label for="inquiry-type">What are you looking for?</label>
+              <select id="inquiry-type" name="inquiry-type">
+                <option value="commission">Commission Inquiry</option>
+                <option value="available-work">Purchasing Available Work</option>
+                <option value="exhibition">Exhibition Opportunity</option>
+                <option value="other">Just saying hello</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message <span aria-hidden="true">*</span></label>
+              <textarea id="message" name="message" rows="5" required aria-required="true" placeholder="Tell me a bit about your project or inquiry..."></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-submit">Send Message</button>
+          </form>
+        </div>
+
+      </div>
+
+
+  <section class="gallery-grid" data-reveal>
+    <div class="gallery-item" data-stagger>
+      <img src="/images/contact/contact-1.jpg" alt="Artwork from Contact" loading="eager" decoding="async" />
+    </div>
+  </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .page-container {
+    padding-top: 120px;
+    padding-bottom: 60px;
+  }
+  
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .page-title {
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+  }
+  
+  .page-divider {
+    height: 2px;
+    width: 60px;
+    background: var(--color-accent);
+    margin: 0 auto;
+  }
+
+  .content-wrapper {
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  .content-wrapper p {
+    margin-bottom: 1.5rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+  }
+
+  .gallery-item {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--color-surface);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 2.5rem;
+    }
+  }
+
+  /* Contact Grid Layout */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Contact Info Side */
+  .contact-info h3 {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .contact-info p {
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    font-size: var(--text-lg);
+  }
+
+  .info-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .info-list li {
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .info-list strong {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    font-size: var(--text-xs);
+    letter-spacing: 2px;
+    color: var(--accent-sage);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .info-list a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.3s var(--ease);
+  }
+
+  .info-list a:hover {
+    color: var(--accent-terracotta);
+  }
+
+  /* Contact Form Side */
+  .contact-form-wrapper {
+    background: var(--bg-elevated);
+    padding: 2.5rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: all 0.3s var(--ease);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-terracotta);
+    box-shadow: 0 0 0 2px rgba(230, 80, 50, 0.1);
+  }
+
+  .btn-submit {
+    width: 100%;
+    margin-top: 1rem;
+    cursor: pointer;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 40px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    transition: all 0.4s var(--ease);
+    background: var(--accent-terracotta);
+    color: var(--bg-primary);
+  }
+
+  .btn-submit:hover {
+    background: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+</style>

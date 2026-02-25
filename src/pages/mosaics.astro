@@ -1,0 +1,298 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StructuredData from '../components/StructuredData.astro';
+import { getCollection } from 'astro:content';
+
+const allArtworks = await getCollection('artworks');
+const pageArtworks = allArtworks.filter(art => art.data.category === 'mosaics');
+---
+
+<Layout image="/images/mosaics/mosaics-1.jpg" title="Mosaics | Ann M. Thane" description="Large-scale public mosaic projects by Ann M. Thane, including the Mother Mosaic and Tree of Life at Riverlink Park in Amsterdam, NY.">
+  <StructuredData />
+  <Header />
+  
+  <main class="page-container fade-in">
+    <header class="page-header">
+      
+      <nav aria-label="Breadcrumb" class="breadcrumb" style="text-align: center; margin-bottom: 2rem; font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 1px;">
+        <a href="/" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-terracotta)'" onmouseout="this.style.color='var(--text-muted)'">Home</a> 
+        <span style="color: var(--border-hover); margin: 0 0.5rem;">/</span> 
+        <span style="color: var(--accent-sage);">Mosaics</span>
+      </nav>
+      <h1 class="page-title">Mosaics</h1>
+      <div class="page-divider"></div>
+    </header>
+
+    <div class="content-wrapper">
+      <div class="intro-block" data-reveal>
+        <p class="lead">The FB page is: <a href="https://www.facebook.com/MotherMosaic/" target="_blank" rel="noopener noreferrer">Mother Mosaic of Amsterdam NY</a>. 🙂</p>
+      </div>
+
+      <article data-reveal>
+        <h2>UPDATE: January 2023</h2>
+        <p>The Mother &amp; Child mosaic was completed at the end of October, just before winter really hit. The steel cover made to shunt rain from the mosaic was wrestled into place by artist Andrew Benson and will be topped off with a life-size crane in the Spring. We will also mosaic both sides and hopefully finish the project before others start this summer!</p>
+        <p>In the studio, we continue to make tile but also have been diving into some collage work (I love working on furniture) and vessels of clay&#8230; pots, vases, mugs and even whistles! I&#8217;ve applied for several grants and have spoken to some select municipalities about projects I think would be fabulous&#8230; we&#8217;ll see. I keep praying to the studio money ball. lol.</p>
+      </article>
+
+      <article data-reveal>
+        <h2>UPDATE: August 2022</h2>
+        <p>Thanks to my Studio Team (Kit, Regan and Sarah Beck, and Suzanna Hunter), Diane Hale Smith, Tammy Merendo-Capone and my lovely husband Peter Thane, for their help with this project. Mother Nature stands at Riverlink Park. We are working on the second side now&#8230; you&#8217;ll recognize the theme. This makes me smile.</p>
+      </article>
+
+      <article data-reveal>
+        <h2>UPDATE: January 2022</h2>
+        <p>As we enter 2022, I thought it important to update you on the planned mosaics for Riverlink Park. These include the &#8220;Tree of Life&#8221; and &#8220;Mother Nature&#8221; that will be mounted on a structure not far from the 9/11 Monument,&nbsp;and proposed mosaics that will partially encapsulate the pillars under RT30 bridge.</p>
+      </article>
+
+      <article class="major-section" data-reveal>
+        <h2>The Mosaics</h2>
+        <blockquote class="accent-quote">
+          &#8220;I will create a mosaic exploring aspects of femininity, non-denominational divinity, beauty, ethnicity and community, as well as light, color, pattern and texture, in an abandoned, outdoor grotto that had once housed a religious statue. It is publicly accessible and visible from the street.&#8221;
+        </blockquote>
+        <p>These are the words that have started me down an artistic path that has been surprising, challenging and incredibly rewarding.</p>
+        
+        <p>For those of you that are unfamiliar with these projects, this process began in 2019 with the application for an Individual Arts grant from Saratoga Arts. The Individual Artist grant came with the goal of &#8220;enhancing artistic career development, technical skills, and broadening exposure, while fostering creative, resourceful and inspiring connections between artists and a community&#8221;.</p>
+        <p>As originally conceived, I had intended to mosaic the figure of a Madonna in a small grotto in the parking lot of Catholic Charities. She was entitled the &#8220;Mother Mosaic of Amsterdam NY&#8221;. She would feature elements from faiths around the world. I planned to include aspects of the Virgin Mary, Guan Yin, and Radha, as well as bright, intricate patterns drawn from traditional, ethnic textiles and folk art, with references to flora, fauna, water, fire and air.</p>
+        <p>Though clearly inspired by Catholicism, it was to incorporate imagery, symbols and words from many world religions and ethnic traditions. This conception was intentionally non-denominational and was supported by SA, the City of Amsterdam (owners of the grotto property) and Catholic Charities, and was awarded in early-2020.</p>
+        
+        <p>The first iteration of a mosaicked figure began to take shape in February in a makeshift studio set up in the attic of my Victorian home. The original sketch was blown up to fit a 5&#8217;x9&#8242; space. Tammy Merendo-Capone, a local ceramicist and vibrant community volunteer, provided studio space, materials, kiln rental and mentoring to create each individual tile in the design. Grant funding was used for these services and the purchase of clay, glazes and equipment. Many thousands of tiles were born.</p>
+        <p>Making tile involves rolling slabs of clay, applying decals or underglaze, cutting to specific shapes, separating each tile, slow drying for a couple of days, firing to bisque, glazing, and firing again. A third fire can be necessary if applying luster. Glass and mirror must be cut to shape as well. The process from clay to finished tiles can take 2-3 weeks.</p>
+        <p>The tile is then applied to a surface prepared with bonding mortar. Once dried, the tape is removed, and the grout applied and sealed. Materials for this part of the process include tile mortar, polymer additive for durability, grout, buckets, sponges, gloves and tarps, etc.</p>
+      </article>
+
+      <article data-reveal>
+        <p>By April 2019, the figure was substantially complete. Having grown in size and complexity, my husband suggested that it may be of better benefit to our community in Riverlink Park. I approached Mayor Cinquanti and Recreation Director Rob Spagnola about the change and remain ever grateful for their agreeing to provide a space for the mosaic.</p>
+        <p>I also began a second mosaic, &#8220;The Tree of Life&#8221;, to appear on the opposite side of the freestanding structure being built for the &#8220;Mother Mosaic&#8221;. The design incorporates tiles Tammy Merendo-Capone donated (marvelous tools, flowers, fairies, leaves, etc.) and others (hearts, animals, houses, American flags, handprints, and items too numerous to mention) that had been made by children of Amsterdam at several public events (while Mayor, I had discussed a similar concept with Tammy to mount on the pilaster that supports the walking bridge over the railroad tracks to Riverlink Park. These tiles were made for that projects and generously donated to this one).</p>
+        <p>The piece represents how industrious the people of our community are and has references to decorative textiles. It also represents how united our community is, most notably through tragedy. This mosaic was begun at the onset of COVID in our community when we lost our first neighbor, Dave Swart, to the terrible disease. The heart of the tree is dedicated to the tremendous love and pride the Swart Family has for their father, husband, grandfather, friend and career firefighter.</p>
+        <p>In May, the City felt it necessary to request a change in design to the first &#8220;Mother Mosaic&#8221;, as the religious references to the Virgin Mary would be lessened (thankfully, the original mosaic has been offered space on Anthony Altieri&#8217;s brick building facing the Southside Veterans memorial on Bridge Street, so this effort will still enhance our city&#8217;s waterfront).</p>
+        <p>While this was a bit of a setback at the time, the new design benefited from my experience with the first two mosaics, and &#8220;Mother Nature&#8221; came to life. A quick sketch was approved and I set about making this a reality, starting at square one, making tiles.</p>
+        <p>I worked nights and weekends on these projects, as I was still working full time at the Department of State, and Tammy fired up the kiln when she could while first and foremost serving our region at Nathan Littauer Hospital, coordinating their COVID staffing and tracking.</p>
+        <p>Saratoga Arts gave extensions to award recipients and my project was slated for launch in 2021. No one at the time could envision that the disease would have had such paralyzing effects for so long on all aspects of community life.</p>
+        <p>Despite this difficulty, I applied for a second grant from Saratoga Arts, this time on behalf of the City of Amsterdam for a Community Arts project. This grant proposed extending the mosaicked elements beyond the monument to the pillars that support RT30 bridge, folding the &#8220;Circle of Life&#8221; theme already present of the Mohawk Valley Gateway Overlook.</p>
+        <p>At the same time, the City applied for additional funding from the Erie Canalway Heritage Corridor to facilitate community tile-making workshops. I was fortunate to work with teaching staff and students from Amsterdam High School, who contributed hundreds of stars and background tile for &#8220;Mother Nature&#8221;.</p>
+      </article>
+
+      <article data-reveal>
+        <h2>2021</h2>
+        <p>Like it was for many, 2021 was a tough year. Due to Tammy&#8217;s personal and work-related commitments, I found space to set up my own studio and kiln in the Clocktower building to make tile. The grants allowed me to purchase the kiln, clay, equipment and a broad spectrum of glazes and materials.</p>
+        <p>I continued working in my attic studio at night, beginning the process of adhering the &#8220;Tree of Life&#8221; mosaic to cement panels and working in great detail on &#8220;Mother Nature&#8221;, placing each tile in its position.</p>
+        <p>When the City&#8217;s Recreation Department arranged several days of tile-making workshops with approximately 100 children ranging in age from 4-14 years old, I took the show on the road.</p>
+        <p>I also hosted smaller, private groups of adults in my studio.</p>
+        <p>I met with City Engineer Mike Clark to discuss how the monument would be constructed and by Fall, the base had been readied to accept the 5&#8217;x12&#8242; upright structure in the Spring of 2022.</p>
+        <p>The kiln was delivered by year&#8217;s end and by November, I had taken on three apprentices, Sarah, Regan and Kit Beck, and we&#8217;ve begun producing the necessary quantities of tile it will take to make this vision a reality.</p>
+      </article>
+
+      <article data-reveal>
+        <h2>2022 &amp; Beyond</h2>
+        <p>As of this January, the studio is in full swing with more changes on the horizon.</p>
+        <p>My studio crew is making test tiles of all of the glazes purchased to date, and will design the Grotto Mosaic, the goal from the beginning! I will build a large, new workbench on casters to more rapidly and in much more temperate conditions, do final work to the relocated mosaics.</p>
+        <p>I&#8217;ll continue to reach out to community organizations, business institutions, and acquaintances to get a diverse and representative sampling of folks invested in the project. I&#8217;d like to get the unique, decorated handprint of as many residents as possible, as community is such a dominant theme in this endeavor.</p>
+        <p>I&#8217;ve started preliminary sketches for the &#8220;Circle of Life&#8221; mosaics, incorporating a hide and seek motif in its design (below are sections of the current mosaic on the MVGO). This will allow for really lovely and engaging, onsite experience. I will also reach out to the Department of Transportation to further garner their support and guidance.</p>
+
+        <p class="summary-points"><strong>These pieces allow me to:</strong></p>
+        <ul>
+          <li>incorporate aspects of what I know as an illustrator and collage artist (composition, light, pattern, color, technique and materials) into discovering a whole, new medium;</li>
+          <li>introduce my work publicly to a broader audience, including those with relatively few opportunities to experience art firsthand;</li>
+          <li>work deliberately over a long period of time to create a large piece of public artwork and hope that this may lead to similar opportunities; and</li>
+          <li>gift my community with a lasting memorial to beauty and optimism.</li>
+        </ul>
+
+        <p>I&#8217;ve also received a gift in working with many different individuals in our community and bridging societal divides with conversation, commonality and intimacy (maybe there’s never been a time that we need this more).</p>
+        <p>Amsterdam is striving to revitalize its downtown and waterfront through cultural and artistic means. Our community benefits directly through beautification efforts, including the new Mohawk Valley Gateway Overlook, Riverlink Park, and various statues and memorials along the river’s edge, and in an indirect way, benefits Amsterdam economically when visitors to our region purchase retail items and services in our city and surrounding towns. I am mindful that the permanence of a mosaic makes it quite possible that this artwork will be viewed for generations to come.</p>
+      </article>
+
+      <div class="grant-acknowledgement" data-reveal>
+        <p>I&#8217;d like to proudly announce that we have been awarded a total $6,500 (two grants) from Saratoga Arts for my Mother Mosaic project, $1,000 from ECNHC, and donations from people around the country! This has helped secure materials, studio space and my beautiful kiln.</p>
+        <p class="muted">Saratoga Arts made this project possible with a Community Arts Grant funded by the New York State Council on the Arts with the support of Governor Andrew M. Cuomo and the New York State Legislature.</p>
+      </div>
+    </div>
+
+
+  
+    <div class="portfolio-cta-block" data-reveal style="text-align: center; margin-bottom: 4rem; padding: 2rem; background: var(--bg-elevated); border-radius: var(--radius-sm); border: 1px solid var(--border);">
+      <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-primary);">Interested in this style?</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Inquire about availability or discuss a custom commission.</p>
+      <a href="/contact/" class="btn btn-primary" style="padding: 0.75rem 2rem; border-radius: 40px;">Contact for Inquiry</a>
+    </div>
+
+<section class="gallery-grid" data-reveal>
+    {pageArtworks.map((artwork, index) => (
+      <div class="gallery-item" data-stagger>
+        <img 
+          src={artwork.data.image} 
+          alt={artwork.data.title || "Artwork from mosaics"} 
+          loading={index < 4 ? "eager" : "lazy"} 
+          fetchpriority={index < 4 ? "high" : "auto"}
+          decoding="async" 
+        />
+      </div>
+    ))}
+  </section>
+  
+    <nav class="portfolio-page-nav" data-reveal style="display: flex; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 2rem; margin-top: 2rem; max-width: 1400px; margin-left: auto; margin-right: auto; padding-left: 5%; padding-right: 5%;">
+      <a href="/women/" class="nav-prev" style="text-decoration: none; color: var(--text-secondary);">&larr; The Women Series</a>
+      <a href="/creative-connections-clubhouse-mosaic/" class="nav-next" style="text-decoration: none; color: var(--text-secondary);">Creative Connections Mosaic &rarr;</a>
+    </nav>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .page-container {
+    padding-top: 120px;
+    padding-bottom: 60px;
+  }
+  
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .page-title {
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+  }
+  
+  .page-divider {
+    height: 2px;
+    width: 60px;
+    background: var(--color-accent);
+    margin: 0 auto;
+  }
+
+  .content-wrapper {
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  .content-wrapper p {
+    margin-bottom: 1.5rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+  }
+
+  .gallery-item {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--color-surface);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 2.5rem;
+    }
+    .content-wrapper {
+      padding: 0 1rem;
+    }
+  }
+
+  /* Typography Enhancements specific to content pages */
+  article {
+    margin-bottom: 4rem;
+  }
+  
+  .content-wrapper h2 {
+    font-size: var(--text-2xl);
+    color: var(--accent-terracotta);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .intro-block {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .lead {
+    font-size: var(--text-lg);
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-primary);
+  }
+
+  .accent-quote {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    line-height: 1.5;
+    color: var(--text-primary);
+    border-left: 4px solid var(--accent-terracotta);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    background: var(--bg-card);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-style: italic;
+  }
+
+  .content-wrapper ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+
+  .content-wrapper li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+  }
+
+  .content-wrapper li::before {
+    content: "•";
+    color: var(--accent-gold);
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+    top: -4px;
+    font-family: var(--font-display);
+  }
+
+  .grant-acknowledgement {
+    max-width: 700px;
+    margin: 4rem auto;
+    text-align: center;
+    padding: 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+
+  .grant-acknowledgement p.muted {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+</style>

@@ -1,0 +1,315 @@
+---
+// src/layouts/Layout.astro
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StructuredData from '../components/StructuredData.astro';
+
+// Interface for page-specific props
+export interface Props {
+	title: string;
+	description: string;
+	image?: string;
+}
+
+const { title, description = 'Art portfolio of Ann M. Thane — mosaics, illustrations, pyrography, ceramics, and more from Amsterdam, NY.', image = '/og-image.jpg' } = Astro.props;
+const ogImageURL = new URL(image, Astro.url);
+---
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+
+		<!-- SEO & Social Meta -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content={ogImageURL} />
+		<meta property="og:url" content={Astro.url} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageURL} />
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+		<StructuredData />
+		<!-- Plausible Analytics — lightweight, privacy-friendly, no cookies -->
+		<script defer data-domain="thaneartwork.com" src="https://plausible.io/js/script.js"></script>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<slot />
+		</main>
+		<Footer />
+
+		<!-- 👁️ The Publisher: Global Immersive Lightbox -->
+		<div id="global-lightbox" class="lightbox">
+			<div class="lightbox-backdrop"></div>
+			
+			<button class="lightbox-nav prev" aria-label="Previous Image">
+				<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+			</button>
+			
+			<div class="lightbox-content">
+				<img id="lightbox-img" src="" alt="Expanded View" />
+				<div class="lightbox-caption"></div>
+			</div>
+			
+			<button class="lightbox-nav next" aria-label="Next Image">
+				<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+			</button>
+			
+			<button class="lightbox-close" aria-label="Close Lightbox">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+			</button>
+		</div>
+
+		<script>
+			// Enhanced Scroll Reveal Script with Staggering
+			document.addEventListener('DOMContentLoaded', () => {
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach(entry => { 
+						if (entry.isIntersecting) { 
+							entry.target.classList.add('revealed');
+							
+							const staggerChildren = entry.target.querySelectorAll('[data-stagger]');
+							if (staggerChildren.length > 0) {
+								staggerChildren.forEach((child, index) => {
+									setTimeout(() => {
+										child.classList.add('revealed');
+									}, index * 60); // Halved the stagger delay for much faster pop-in
+								});
+							}
+							
+							observer.unobserve(entry.target); 
+						} 
+					});
+				}, { threshold: 0.01 }); // Reduced threshold so it triggers almost immediately
+	
+				document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+				// Initialize Global Lightbox with Navigation
+				const lightbox = document.getElementById('global-lightbox');
+				const lightboxImg = document.getElementById('lightbox-img');
+				const lightboxCaption = document.querySelector('.lightbox-caption');
+				const btnPrev = document.querySelector('.lightbox-nav.prev');
+				const btnNext = document.querySelector('.lightbox-nav.next');
+				
+				let currentImages = [];
+				let currentIndex = 0;
+
+				if (lightbox && lightboxImg) {
+					const galleryImagesRaw = document.querySelectorAll('.gallery-item img, .gallery-card img');
+					currentImages = Array.from(galleryImagesRaw);
+					
+					const updateLightboxImage = (index) => {
+						if (currentImages.length === 0) return;
+						const img = currentImages[index];
+						const src = img.getAttribute('src');
+						const alt = img.getAttribute('alt');
+						lightboxImg.setAttribute('src', src);
+						if(lightboxCaption) lightboxCaption.textContent = alt || '';
+					};
+
+					const showNext = (e) => {
+						if(e) e.stopPropagation();
+						currentIndex = (currentIndex + 1) % currentImages.length;
+						updateLightboxImage(currentIndex);
+					};
+
+					const showPrev = (e) => {
+						if(e) e.stopPropagation();
+						currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+						updateLightboxImage(currentIndex);
+					};
+
+					currentImages.forEach((img, index) => {
+						img.style.cursor = 'zoom-in';
+						
+						img.addEventListener('click', (e) => {
+							e.preventDefault();
+							currentIndex = index;
+							updateLightboxImage(currentIndex);
+							
+							lightbox.classList.add('active');
+							document.body.style.overflow = 'hidden'; // Prevent background scrolling
+						});
+					});
+
+					const closeLightbox = () => {
+						lightbox.classList.remove('active');
+						document.body.style.overflow = '';
+						setTimeout(() => lightboxImg.setAttribute('src', ''), 400); // clear after fade
+					};
+
+					// Navigation Click Handlers
+					if(btnPrev) btnPrev.addEventListener('click', showPrev);
+					if(btnNext) btnNext.addEventListener('click', showNext);
+
+					lightbox.addEventListener('click', (e) => {
+						// Only close if clicking the backdrop, not the image or buttons
+						if (e.target.classList.contains('lightbox-backdrop') || e.target.classList.contains('lightbox')) {
+							closeLightbox();
+						}
+					});
+					
+					// Keyboard Navigation
+					document.addEventListener('keydown', (e) => {
+						if (!lightbox.classList.contains('active')) return;
+						if (e.key === 'Escape') closeLightbox();
+						if (e.key === 'ArrowRight') showNext();
+						if (e.key === 'ArrowLeft') showPrev();
+					});
+				}
+			});
+		</script>
+	</body>
+<style is:global>
+	body {
+		padding-top: 70px; /* Offset for fixed header */
+	}
+
+	/* ——— Global Elegant Lightbox ——— */
+	.lightbox {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		z-index: 9999;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.4s;
+	}
+
+	.lightbox.active {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.lightbox-backdrop {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(10, 10, 12, 0.9);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+	}
+
+	.lightbox-content {
+		position: relative;
+		z-index: 2;
+		max-width: 90vw;
+		max-height: 90vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		transform: scale(0.95) translateY(10px);
+		transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+
+	.lightbox.active .lightbox-content {
+		transform: scale(1) translateY(0);
+	}
+
+	.lightbox-content img {
+		max-width: 100%;
+		max-height: 85vh;
+		object-fit: contain;
+		border-radius: 8px;
+		box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+	}
+
+	.lightbox-caption {
+		color: #ffffff;
+		font-family: var(--font-body);
+		font-size: 1rem;
+		margin-top: 1rem;
+		text-align: center;
+		opacity: 0.8;
+		letter-spacing: 0.5px;
+	}
+	
+	.lightbox-caption {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		color: white;
+		margin-top: 1.5rem;
+		text-align: center;
+		font-family: var(--font-body);
+		font-size: 1.1rem;
+		letter-spacing: 1px;
+	}
+	
+	.lightbox-nav {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		background: rgba(0, 0, 0, 0.4);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		color: white;
+		width: 60px;
+		height: 60px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		cursor: pointer;
+		z-index: 10002;
+		transition: all 0.3s var(--ease);
+		backdrop-filter: blur(10px);
+	}
+	
+	.lightbox-nav:hover {
+		background: rgba(255, 255, 255, 0.1);
+		border-color: var(--accent-terracotta);
+		color: var(--accent-terracotta);
+		transform: translateY(-50%) scale(1.1);
+	}
+	
+	.lightbox-nav.prev {
+		left: 2rem;
+	}
+	
+	.lightbox-nav.next {
+		right: 2rem;
+	}
+
+	.lightbox-close {
+		position: absolute;
+		top: 2rem;
+		right: 2rem;
+		z-index: 3;
+		background: rgba(255,255,255,0.1);
+		border: 1px solid rgba(255,255,255,0.2);
+		color: white;
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.lightbox-close:hover {
+		background: rgba(255,255,255,0.2);
+		transform: scale(1.1);
+	}
+</style>

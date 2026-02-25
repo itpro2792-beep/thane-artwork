@@ -1,0 +1,59 @@
+---
+// src/components/Footer.astro
+const socialLinks = [
+  { name: "Instagram", url: "https://www.instagram.com/wildthane1/" },
+  { name: "Facebook (Art)", url: "https://www.facebook.com/thaneartwork" },
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/ann-m-thane/" },
+  { name: "Personal Blog", url: "https://wildthane.wordpress.com" },
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-social">
+      <a href="https://www.instagram.com/wildthane1/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://www.facebook.com/thaneartwork" target="_blank" rel="noopener noreferrer">Facebook</a>
+      <a href="https://www.linkedin.com/in/ann-m-thane/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+    <div class="footer-copyright">
+      &copy; {currentYear} Ann M. Thane. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding: 2rem 1rem;
+    margin-top: 4rem;
+    background-color: var(--text);
+    color: var(--stardust-white);
+    text-align: center;
+  }
+  .footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .footer-social a {
+    color: var(--stardust-white);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease;
+  }
+  .footer-social a:hover,
+  .footer-social a:focus-visible {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .footer-copyright {
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+</style>

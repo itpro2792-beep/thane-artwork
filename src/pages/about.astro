@@ -1,0 +1,132 @@
+---
+// src/pages/about.astro
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+	title="About Ann M. Thane"
+	description="Discover the story of Ann M. Thane, a multi-disciplinary artist, former mayor, and community builder from Amsterdam, NY."
+>
+	<section class="about-section">
+		<header class="about-header" data-reveal>
+			<h1>A Return to Art</h1>
+		</header>
+
+		<div class="about-grid">
+			<div class="bio-main" data-reveal>
+				<p class="lead">
+					Ann M. Thane is a multi-disciplinary artist based in Amsterdam, NY. She has explored classical realism, illustration, mosaics, pyrography, ceramics, jewelry, and murals across a career that has taken her from a freelance graphic artist in Albany, to Director of the Walter Elwood Museum, to Mayor of Amsterdam, to her current full return to art.
+				</p>
+				<p>
+					She is best known today for her large-scale public mosaic projects and her 'Women' series — collaged illustrations exploring the complexity of the feminine experience. Her work is a testament to a life lived at the intersection of public service and private creation, always with the goal of building a more beautiful and connected community.
+				</p>
+			</div>
+			<aside class="bio-sidebar" data-reveal>
+				<div class="portrait-placeholder"></div>
+				<div class="career-timeline">
+					<h4>Career Path</h4>
+					<ul>
+						<li>Artist</li>
+						<li>Museum Director</li>
+						<li>Mayor of Amsterdam</li>
+						<li>Return to Art</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</section>
+
+	<section class="press-section">
+		<div class="container">
+			<h2 data-reveal>In the Press</h2>
+			<div class="press-grid" data-reveal>
+				<a href="https://boldjourney.com/news/meet-ann-m-thane/" target="_blank" rel="noopener noreferrer" class="press-card" data-stagger>
+					<h3>Bold Journey Magazine</h3>
+					<p>Meet Ann M Thane</p>
+					<span>Read Article &rarr;</span>
+				</a>
+				<a href="https://issuu.com/ininkny/docs/2023_february_518_profiles_magazine" target="_blank" rel="noopener noreferrer" class="press-card" data-stagger>
+					<h3>518 Profiles Magazine</h3>
+					<p>An Artist's Journey</p>
+					<span>Read Article &rarr;</span>
+				</a>
+				<a href="#" class="press-card" data-stagger>
+					<h3>The Daily Gazette</h3>
+					<p>Former Mayor Just Wants to Make Art</p>
+					<span>Read Article &rarr;</span>
+				</a>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.about-header { text-align: center; margin-bottom: 3rem; }
+	.about-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 3rem;
+	}
+	@media (min-width: 768px) {
+		.about-grid { grid-template-columns: 2fr 1fr; }
+		.bio-sidebar { order: -1; }
+	}
+	.lead { font-size: var(--text-lg); color: var(--text-primary); }
+	
+	.portrait-placeholder {
+		width: 100%;
+		padding-bottom: 100%; /* 1:1 Aspect Ratio */
+		background-color: var(--bg-elevated);
+		border-radius: var(--radius-sm);
+		margin-bottom: 2rem;
+	}
+	.career-timeline h4 {
+		font-family: var(--font-body);
+		font-size: var(--text-sm);
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		color: var(--text-muted);
+		margin-bottom: 1rem;
+	}
+	.career-timeline ul {
+		list-style: none;
+	}
+	.career-timeline li {
+		font-weight: 500;
+		margin-bottom: 0.5rem;
+		position: relative;
+		padding-left: 20px;
+	}
+	.career-timeline li::before {
+		content: '→';
+		position: absolute;
+		left: 0;
+		color: var(--accent-terracotta);
+	}
+
+	.press-section { background: var(--bg-subtle); }
+	.press-section h2 { text-align: center; margin-bottom: 3rem; }
+	.press-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1.5rem;
+	}
+	.press-card {
+		display: block;
+		background: var(--bg-primary);
+		padding: 2rem;
+		border-radius: var(--radius-sm);
+		border: 1px solid var(--border);
+		transition: var(--transition);
+	}
+	.press-card:hover {
+		transform: translateY(-4px);
+		border-color: var(--border-hover);
+		box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+	}
+	.press-card h3 { font-size: var(--text-lg); }
+	.press-card p { margin-top: 0.5rem; }
+	.press-card span {
+		font-weight: bold;
+		font-size: var(--text-sm);
+	}
+</style>

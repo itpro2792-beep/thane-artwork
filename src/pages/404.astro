@@ -1,0 +1,54 @@
+---
+// src/pages/404.astro
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+	title="Page Not Found"
+	description="The page you were looking for could not be found."
+>
+	<section class="not-found-section">
+		<div class="container narrow">
+			<h1 data-reveal>404</h1>
+			<p class="lead" data-reveal>The page you were looking for seems to have been misplaced in the studio.</p>
+			<a href="/" class="button" data-reveal>Return to the Homepage</a>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.not-found-section {
+		text-align: center;
+		padding: var(--section-pad) 22px;
+		min-height: 50vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+    .container.narrow {
+        max-width: 600px;
+    }
+	h1 {
+		font-size: var(--text-hero);
+		letter-spacing: -2px;
+		color: var(--accent-terracotta);
+	}
+	.lead {
+		font-size: var(--text-lg);
+		color: var(--text-secondary);
+		margin: 1.5rem 0 2.5rem;
+	}
+	.button {
+		display: inline-block;
+		background: var(--accent-terracotta);
+		color: var(--bg-primary);
+		padding: 1rem 2.5rem;
+		border-radius: 99px;
+		text-decoration: none;
+		font-weight: 500;
+		transition: var(--transition);
+	}
+	.button:hover {
+		background: var(--accent-plum);
+		transform: translateY(-2px);
+	}
+</style>
