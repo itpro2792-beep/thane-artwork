@@ -115,9 +115,15 @@ const ogImageURL = new URL(image, Astro.url);
 						if (currentImages.length === 0) return;
 						const img = currentImages[index];
 						const src = img.getAttribute('src');
-						const alt = img.getAttribute('alt');
+						let alt = img.getAttribute('alt') || '';
+						
+						// Very basic format: replace hyphens with spaces and title case
+						if (alt && alt.includes('-')) {
+						    alt = alt.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+						}
+						
 						lightboxImg.setAttribute('src', src);
-						if(lightboxCaption) lightboxCaption.textContent = alt || '';
+						if(lightboxCaption) lightboxCaption.textContent = alt;
 					};
 
 					const showNext = (e) => {

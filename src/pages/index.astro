@@ -7,7 +7,7 @@ import { getCollection } from 'astro:content';
 const allArtworks = await getCollection('artworks');
 
 // Select a few specific pieces to feature
-const featuredCategories = ['women', 'mosaics', 'pyrography'];
+const featuredCategories = ['women', 'mosaics', 'pyrography', 'pottery'];
 const featuredArtworks = featuredCategories.map(cat => 
   allArtworks.find(art => art.data.category === cat)
 ).filter(Boolean); // Filter out any undefined if collection is empty
@@ -55,7 +55,8 @@ const featuredArtworks = featuredCategories.map(cat =>
 					const categoryTitles = {
 						'women': 'The Women Series',
 						'mosaics': 'Mosaics & Public Art',
-						'pyrography': 'Pyrography'
+						'pyrography': 'Pyrography',
+						'pottery': 'Pottery & Ceramics'
 					};
 					const title = categoryTitles[artwork.data.category] || artwork.data.category;
 					
