@@ -6,9 +6,9 @@ import markdoc from '@astrojs/markdoc';
 import keystatic from '@keystatic/astro';
 import node from '@astrojs/node';
 
-// Set STATIC_BUILD=true to produce a static site for deployment
+// Set STATIC_BUILD=true or VERCEL=1 to produce a static site for deployment
 // e.g.: STATIC_BUILD=true npx astro build
-const isStaticBuild = process.env.STATIC_BUILD === 'true';
+const isStaticBuild = process.env.STATIC_BUILD === 'true' || process.env.VERCEL === '1';
 
 // https://astro.build/config
 export default defineConfig({
